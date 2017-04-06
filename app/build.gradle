@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    // 导入libs文件下面的所有jar包
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

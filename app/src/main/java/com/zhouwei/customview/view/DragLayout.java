@@ -1,6 +1,8 @@
 package com.zhouwei.customview.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Created by zhouwei on 2017/4/4.
@@ -118,6 +122,9 @@ public class DragLayout extends FrameLayout {
         }
 
         @Override
+        /**
+         * view 被拖动 位置变化的时候的回调
+         */
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             super.onViewPositionChanged(changedView, left, top, dx, dy);
 
@@ -134,8 +141,84 @@ public class DragLayout extends FrameLayout {
                 mainContent.layout(newLeft, 0, newLeft + width, 0 + height);
             }
 
-            // 为了兼容安卓10 一下的版本 每次位置移动之后 重绘界面
+            // 更新状态 执行动画
+            dispatchDragEvent(newLeft);
+
+            // 为了兼容安卓10 以下的版本 每次位置移动之后 重绘界面
             invalidate();
+        }
+
+        /**
+         * 更新状态 执行动画
+         * @param newLeft
+         */
+        private void dispatchDragEvent(int newLeft) {
+            float percent = (float) (newLeft * 1.0 / range);
+
+            // 伴随动画 ViewHelper兼容安卓8 以下的手机 兼容包nineoldandroids-2.4.0.jar
+            // leftContent.setScaleX(0.5f);
+            ViewHelper.setScaleX(leftContent, evaluate(percent, 0.5f, 1.0f));//缩放
+            ViewHelper.setScaleY(leftContent, evaluate(percent, 0.5f, 1.0f));//缩放
+
+            // 从负的位置移动0
+            ViewHelper.setTranslationX(leftContent, evaluate(percent, -width / 2.0f, 0));
+
+            // 透明度
+            ViewHelper.setAlpha(leftContent, evaluate(percent, 0.5f, 1.0f));
+
+            // 主面板
+            ViewHelper.setScaleX(mainContent, evaluate(percent, 1.0f, 0.8f));//缩放
+            ViewHelper.setScaleY(mainContent, evaluate(percent, 1.0f, 0.8f));//缩放
+
+            // 设置背景变化
+            getBackground().setColorFilter((Integer) evaluateColor(percent, Color.BLACK, Color.TRANSPARENT), PorterDuff.Mode.SRC_OVER);
+        }
+
+        /**
+         * This function returns the calculated in-between value for a color
+         * given integers that represent the start and end values in the four
+         * bytes of the 32-bit int. Each channel is separately linearly interpolated
+         * and the resulting calculated values are recombined into the return value.
+         *
+         * @param fraction The fraction from the starting to the ending values
+         * @param startValue A 32-bit int value representing colors in the
+         * separate bytes of the parameter
+         * @param endValue A 32-bit int value representing colors in the
+         * separate bytes of the parameter
+         * @return A value that is calculated to be the linearly interpolated
+         * result, derived by separating the start and end values into separate
+         * color channels and interpolating each one separately, recombining the
+         * resulting values in the same way.
+         */
+        public Object evaluateColor(float fraction, Object startValue, Object endValue) {
+            int startInt = (Integer) startValue;
+            int startA = (startInt >> 24) & 0xff;
+            int startR = (startInt >> 16) & 0xff;
+            int startG = (startInt >> 8) & 0xff;
+            int startB = startInt & 0xff;
+
+            int endInt = (Integer) endValue;
+            int endA = (endInt >> 24) & 0xff;
+            int endR = (endInt >> 16) & 0xff;
+            int endG = (endInt >> 8) & 0xff;
+            int endB = endInt & 0xff;
+
+            return (int) ((startA + (int) (fraction * (endA - startA))) << 24) |
+                    (int) ((startR + (int) (fraction * (endR - startR))) << 16) |
+                    (int) ((startG + (int) (fraction * (endG - startG))) << 8) |
+                    (int) ((startB + (int) (fraction * (endB - startB))));
+        }
+
+        /**
+         * 估值器 根据百分比 算出一个区间的值
+         * @param fraction
+         * @param startValue
+         * @param endValue
+         * @return
+         */
+        public Float evaluate(float fraction, Number startValue, Number endValue) {
+            float startFloat = startValue.floatValue();
+            return startFloat + fraction * (endValue.floatValue() - startFloat);
         }
 
         @Override
@@ -168,20 +251,27 @@ public class DragLayout extends FrameLayout {
     public void close(boolean isSmooth) {
         int finalLeft = 0;
         if (true == isSmooth) {
-            // 触发平滑的动画
+            // 触发平滑的动画 返回值true表示还没有移动到指定的位置
             if (viewDragHelper.smoothSlideViewTo(mainContent, finalLeft, 0)) {
-                // 返回值true表示还没有移动到指定的位置
+                // 刷新界面 刷新viewGroup导致其中的所有的孩子被刷新
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         }
         mainContent.layout(finalLeft, 0, finalLeft + width, 0 + height);
     }
 
+    /**
+     * computeScroll调用Scroller，只要computeScroll调用连续，Scroller也会连续，
+     * 实质上computeScroll的连续性又invalidate方法控制，scrollTo,scrollBy都会调用invalidate，
+     * 而invalidate回去触发draw,从而computeScroll被连续调用，综上，Scroller也会被连续调用，
+     * 除非invalidate停止调用
+     */
     @Override
-    public void computeScroll() {
+    public void computeScroll() {//invalidate刷新界面 会触发computeScroll view.invalidate(),会触发onDraw和computeScroll()
         super.computeScroll();
-
+        // viewDragHelper.continueSettling(true) 判断是否持续平滑动画 返回true表示需要继续执行动画
         if (viewDragHelper.continueSettling(true)) {
+            // 刷新界面
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
@@ -196,9 +286,8 @@ public class DragLayout extends FrameLayout {
     public void open(boolean isSmooth) {
         int finalLeft = range;
         if (true == isSmooth) {
-            // 触发平滑的动画
+            // 触发平滑的动画 返回值true表示还没有移动到指定的位置
             if (viewDragHelper.smoothSlideViewTo(mainContent, finalLeft, 0)) {
-                // 返回值true表示还没有移动到指定的位置
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         }
