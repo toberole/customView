@@ -13,9 +13,14 @@ public class MainActivity extends AppCompatActivity {
         String str = "";
         // 提交一行代码
         Log.i("AAAA", "小哥很坏哦");
+        // AAAAAAAAAAAAAAAAAAAAAA
 
+        // BBBBBBBBBBBBBBBBBBBBBBBB
         // 测试一把冲突啊
 
         // merge合并冲突
+        Log.i("AAAA","小哥很坏哦");
+
+
     }
 }
