@@ -35,31 +35,4 @@ public class Student {
          */
         return birthday;
     }
-
-        /*
-    		AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-		    AAAAAAAAAAAAAAAAAAAAAAA
-    */
-
-    /*
-    		git merger origin master
-    		git diff origin master
-    		git getch origin master
-    */
-
-
-
-    /**
-     * git add
-     * git commit
-     * git log
-     */
-
-
 }
