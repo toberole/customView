@@ -12,5 +12,9 @@ public class Student {
     private String gender;
 
     private String birthday;
+    
+    public int add(int x,int y){
+    	return x+y;	
+    }
 
 }
