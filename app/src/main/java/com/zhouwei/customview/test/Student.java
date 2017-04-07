@@ -30,6 +30,7 @@ public class Student {
     }
 
     public String getBirthday() {
+    		// ÉúÈÕ°¡
         return birthday;
     }
 }
