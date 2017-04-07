@@ -11,11 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 提交一行代码
-        Log.i("AAAA","小哥很坏哦");
-        
-        // AAAAAAAAAAAAAAAAAAAAAA
-        
-        // BBBBBBBBBBBBBBBBBBBBBBBB
+
     }
 }
