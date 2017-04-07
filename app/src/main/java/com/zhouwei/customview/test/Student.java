@@ -33,4 +33,10 @@ public class Student {
     		// ÉúÈÕ°¡
         return birthday;
     }
+    
+    /*
+    		git merger origin master
+    		git diff origin master
+    		git getch origin master
+    */
 }
