@@ -5,4 +5,7 @@ package com.zhouwei.customview.test;
  */
 
 public class Student {
+    private String gender;
+
+    private String birthday;
 }
