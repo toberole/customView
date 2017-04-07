@@ -31,7 +31,7 @@ public class Student {
 
     public String getBirthday() {
         /**
-         * 生日
+         * 生日 		// ���հ�
          */
         return birthday;
     }
