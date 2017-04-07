@@ -31,8 +31,14 @@ public class Student {
 
     public String getBirthday() {
         /**
-         * 生日 		// ���հ�
+         * 生日
          */
         return birthday;
     }
+
+    /**
+     * git add
+     * git commit
+     * git log
+     */
 }
