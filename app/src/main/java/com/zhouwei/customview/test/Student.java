@@ -13,4 +13,19 @@ public class Student {
 
     private String birthday;
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
 }
