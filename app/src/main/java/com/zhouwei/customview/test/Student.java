@@ -30,6 +30,9 @@ public class Student {
     }
 
     public String getBirthday() {
+        /**
+         * 生日
+         */
         return birthday;
     }
 }
