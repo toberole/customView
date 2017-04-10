@@ -18,20 +18,45 @@ import android.widget.FrameLayout;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
- * Created by zhouwei on 2017/4/4.
+ * 防侧滑控件slidingmenu
  */
 public class DragLayout extends FrameLayout {
-
     private ViewDragHelper viewDragHelper;
     private ViewGroup leftContent;
     private ViewGroup mainContent;
     private int width;
     private int height;
 
+    private Status status = Status.Close;
+
+    /**
+     * 滑动监听
+     */
+    private OnDragStatusChangeListener listener;
+
     /**
      * 控件可以滑动的范围
      */
     private int range;
+
+    public enum Status {
+        Close, Open, Draging
+    }
+
+    /**
+     * 滑动的监听接口
+     */
+    public interface OnDragStatusChangeListener {
+        void onClose();
+
+        void onOpen();
+
+        void onDraging(float percent);
+    }
+
+    public void setOnDragStatusChangeListener(OnDragStatusChangeListener listener) {
+        this.listener = listener;
+    }
 
     public DragLayout(@NonNull Context context) {
         this(context, null);
@@ -155,8 +180,42 @@ public class DragLayout extends FrameLayout {
         private void dispatchDragEvent(int newLeft) {
             float percent = (float) (newLeft * 1.0 / range);
 
-            // 伴随动画 ViewHelper兼容安卓8 以下的手机 兼容包nineoldandroids-2.4.0.jar
+            // 更新状态
+            Status preStatus = status;
+            status = updateStatus(percent);
+            if (status != preStatus) {
+                if (status == Status.Close) {
+                    if (listener != null) {
+                        listener.onClose();
+                    }
+                } else if (status == Status.Open) {
+                    if (listener != null) {
+                        listener.onOpen();
+                    }
+                } else {
+                    if (listener != null) {
+                        listener.onDraging(percent);
+                    }
+                }
+            }
+
+            // 执行动画
+            animViews(percent);
+        }
+
+        private Status updateStatus(float percent) {
+            if (percent == 0f) {
+                return Status.Close;
+            } else if (percent == 1.0f) {
+                return Status.Open;
+            } else {
+                return Status.Draging;
+            }
+        }
+
+        private void animViews(float percent) {
             // leftContent.setScaleX(0.5f);
+            // 伴随动画 ViewHelper兼容安卓8 以下的手机 兼容包nineoldandroids-2.4.0.jar
             ViewHelper.setScaleX(leftContent, evaluate(percent, 0.5f, 1.0f));//缩放
             ViewHelper.setScaleY(leftContent, evaluate(percent, 0.5f, 1.0f));//缩放
 
