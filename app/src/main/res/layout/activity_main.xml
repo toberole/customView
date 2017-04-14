@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zw="http://schemas.android.com/apk/res-auto/com.zhouwei.customview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
     <!-- 测试DragLayout
         <com.zhouwei.customview.view.DragLayout
             android:id="@+id/dragLayout"
@@ -20,9 +22,17 @@
                 android:background="#6600FF00" />
 
         </com.zhouwei.customview.view.DragLayout>
-    -->
-    <com.zhouwei.customview.view.QuickIndexBar
-        android:layout_width="30dp"
+
+        <com.zhouwei.customview.view.QuickIndexBar
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="#66000000" />
+
+        -->
+    <com.zhouwei.customview.view.TimeView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#66000000" />
+        zw:border_color="#FF0000"
+        zw:border_width="10dp" />
+
 </LinearLayout>
