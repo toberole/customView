@@ -28,11 +28,17 @@
             android:layout_height="match_parent"
             android:background="#66000000" />
 
-        -->
+
+
+-->
     <com.zhouwei.customview.view.TimeView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         zw:border_color="#FF0000"
         zw:border_width="10dp" />
+
+
+
 
 </LinearLayout>
