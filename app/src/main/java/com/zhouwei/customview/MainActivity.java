@@ -15,16 +15,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btntestParallaxListview;
     private Button btntestaes;
+    private Button btntestSpannableString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.btntestSpannableString = (Button) findViewById(R.id.btn_test_SpannableString);
         this.btntestaes = (Button) findViewById(R.id.btn_test_aes);
         this.btntestParallaxListview = (Button) findViewById(R.id.btn_test_ParallaxListview);
 
         btntestParallaxListview.setOnClickListener(this);
         btntestaes.setOnClickListener(this);
+        btntestSpannableString.setOnClickListener(this);
     }
 
     @Override
@@ -70,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            case R.id.btn_test_SpannableString:
+                intent = new Intent(MainActivity.this, SpannableStrActivity.class);
+                MainActivity.this.startActivity(intent);
+                break;
+
         }
     }
 }

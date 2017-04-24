@@ -6,13 +6,22 @@
     android:orientation="vertical">
 
     <Button
-        android:text="btn_test_ParallaxListview"
         android:id="@+id/btn_test_ParallaxListview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="btn_test_ParallaxListview" />
+
     <Button
-        android:text="btn_test_AES"
         android:id="@+id/btn_test_aes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="btn_test_AES" />
+
+
+    <Button
+        android:id="@+id/btn_test_SpannableString"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btn_test_SpannableString" />
+
 </LinearLayout>
