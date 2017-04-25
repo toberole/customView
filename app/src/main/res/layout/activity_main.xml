@@ -12,6 +12,19 @@
         android:text="btn_test_ParallaxListview" />
 
     <Button
+        android:id="@+id/btn_test_BesselLoadingView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btn_test_BesselLoadingView" />
+
+    <Button
+        android:id="@+id/btn_test_HighLightText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btn_test_HighLightText" />
+
+
+    <Button
         android:id="@+id/btn_test_aes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,4 +37,18 @@
         android:layout_height="wrap_content"
         android:text="btn_test_SpannableString" />
 
+
+    <TextView
+        android:id="@+id/tv_test_HighLightText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btn_test_HighLightText" />
+
+    <TextView
+        android:id="@+id/tv_test_HighLightText1"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:paddingLeft="35px"
+        android:paddingRight="35px"
+        android:text="btn_test_1" />
 </LinearLayout>

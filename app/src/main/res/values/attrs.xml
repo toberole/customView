@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--自定义时钟的属性-->
     <declare-styleable name="TimeView">
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
+    </declare-styleable>
+
+    <!--自定义贝塞尔加载动画图的属性-->
+    <declare-styleable name="BesselLoadingView">
+        <attr name="loading_radius" format="dimension" />
+        <attr name="loading_color" format="color" />
+        <attr name="loading_duration" format="integer" />
     </declare-styleable>
 </resources>

@@ -1,13 +1,16 @@
 package com.zhouwei.customview;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.zhouwei.customview.util.AESCipher;
+import com.zhouwei.customview.util.HighLightTextUtil;
 
 import static com.zhouwei.customview.util.AESCipher.aesDecryptString;
 
@@ -16,18 +19,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btntestParallaxListview;
     private Button btntestaes;
     private Button btntestSpannableString;
+    private Button btntestBesselLoadingView;
+    private Button btntestHighLightText;
+    private android.widget.TextView tvtestHighLightText;
+    private TextView tvtestHighLightText1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.tvtestHighLightText1 = (TextView) findViewById(R.id.tv_test_HighLightText1);
+        this.tvtestHighLightText = (TextView) findViewById(R.id.tv_test_HighLightText);
+
+        this.btntestHighLightText = (Button) findViewById(R.id.btn_test_HighLightText);
+        this.btntestBesselLoadingView = (Button) findViewById(R.id.btn_test_BesselLoadingView);
         this.btntestSpannableString = (Button) findViewById(R.id.btn_test_SpannableString);
         this.btntestaes = (Button) findViewById(R.id.btn_test_aes);
         this.btntestParallaxListview = (Button) findViewById(R.id.btn_test_ParallaxListview);
 
+        btntestHighLightText.setOnClickListener(this);
         btntestParallaxListview.setOnClickListener(this);
         btntestaes.setOnClickListener(this);
         btntestSpannableString.setOnClickListener(this);
+        btntestBesselLoadingView.setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +90,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_test_SpannableString:
                 intent = new Intent(MainActivity.this, SpannableStrActivity.class);
                 MainActivity.this.startActivity(intent);
+                break;
+            case R.id.btn_test_BesselLoadingView:
+                intent = new Intent(MainActivity.this, BesselLoadingViewActivity.class);
+                MainActivity.this.startActivity(intent);
+                break;
+
+            case R.id.btn_test_HighLightText:
+//                String str[] = new String[]{"hushfuihui哈哈哒哈哈fjksdj哈击碎ush安吉哦哈", "uishushi哈哈哒ush击碎安吉哦哈"};
+//                String t = "ush";
+//                List<SpannableStringBuilder> texts = HighLightTextUtil.batchHighLightText(Arrays.asList(str), t, Color.RED);
+//                tvtestHighLightText1.setText(texts.get(0).toString());
+//
+//                tvtestHighLightText.setText(texts.get(1));
+
+//                String hanzi = "上传数据出错";
+//                String pinyin = PinyinHelper.hanZiToPinyin(hanzi);
+//                Log.i("AAAA", hanzi + "-------------->" + pinyin);
+//
+//                String fl = HighLightTextUtil.getHanZiPinYinFirstLetter(hanzi);
+//                Log.i("AAAA", hanzi + "-------------->" + fl);
+                String hanzi = "abababababababababababababababababababababababababababababababababababababababab哈哈abababababababababababababababababababababababababababababababababababababababab";
+
+                // Log.i("AAAA", "measure: " + tvtestHighLightText1.getPaint().measureText("btn_test_1ssss") + "");
+                //int maxw = tvtestHighLightText.getWidth();
+
+                int maxw = tvtestHighLightText.getWidth();
+                int leftpadding = tvtestHighLightText.getPaddingLeft();
+                int rightPadding = tvtestHighLightText.getPaddingRight();
+
+                Log.i("AAAA", "maxw:" + maxw);
+                tvtestHighLightText.setTextColor(Color.BLACK);
+                tvtestHighLightText.setTextSize(40);
+                HighLightTextUtil.highLightText(hanzi, "哈哈", Color.RED, maxw,tvtestHighLightText);
+
+//                int w = tvtestHighLightText1.getWidth();
+//                int leftpadding = tvtestHighLightText1.getPaddingLeft();
+//                int rightPadding = tvtestHighLightText1.getPaddingRight();
+//                Log.i("AAAA", "width:" + w);
+//                Log.i("AAAA", "leftpadding:" + leftpadding);
+//                Log.i("AAAA", "rightPadding:" + rightPadding);
                 break;
 
         }
