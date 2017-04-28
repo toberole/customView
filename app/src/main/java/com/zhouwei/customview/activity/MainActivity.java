@@ -18,6 +18,9 @@ import com.zhouwei.customview.util.HighLightTextUtil;
 
 import static com.zhouwei.customview.util.AESCipher.aesDecryptString;
 
+/**
+ * wawa
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btntestParallaxListview;
