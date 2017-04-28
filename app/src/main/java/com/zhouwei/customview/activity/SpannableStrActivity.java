@@ -1,4 +1,4 @@
-package com.zhouwei.customview;
+package com.zhouwei.customview.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.UnderlineSpan;
 import android.widget.TextView;
+
+import com.zhouwei.customview.R;
 
 public class SpannableStrActivity extends AppCompatActivity {
 

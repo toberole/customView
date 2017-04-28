@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ParallaxListviewActivity" />
-        <activity android:name=".SpannableStringActivity" />
-        <activity android:name=".SpannableStrActivity" />
-        <activity android:name=".BesselLoadingViewActivity"></activity>
+        <activity android:name=".activity.ParallaxListviewActivity" />
+        <activity android:name=".activity.SpannableStringActivity" />
+        <activity android:name=".activity.SpannableStrActivity" />
+        <activity android:name=".activity.BesselLoadingViewActivity"></activity>
     </application>
 
 </manifest>

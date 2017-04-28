@@ -74,6 +74,10 @@ public class HighLightTextUtil {
             return target;
         }
 
+        if(getTextWidth(tv,text)<=maxWidth){
+            return text;
+        }
+
         threePointWidth = getTextWidth(tv, "…");
 
         String res = null;

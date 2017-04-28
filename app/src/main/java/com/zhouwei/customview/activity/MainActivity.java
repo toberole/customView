@@ -1,4 +1,4 @@
-package com.zhouwei.customview;
+package com.zhouwei.customview.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.zhouwei.customview.R;
+import com.zhouwei.customview.adapter.MyAdapter;
+import com.zhouwei.customview.test.TestData;
 import com.zhouwei.customview.util.AESCipher;
 import com.zhouwei.customview.util.HighLightTextUtil;
 
@@ -23,11 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btntestHighLightText;
     private android.widget.TextView tvtestHighLightText;
     private TextView tvtestHighLightText1;
+    private android.widget.ListView lVtestdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.lVtestdata = (ListView) findViewById(R.id.lV_testdata);
         this.tvtestHighLightText1 = (TextView) findViewById(R.id.tv_test_HighLightText1);
         this.tvtestHighLightText = (TextView) findViewById(R.id.tv_test_HighLightText);
 
@@ -42,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btntestaes.setOnClickListener(this);
         btntestSpannableString.setOnClickListener(this);
         btntestBesselLoadingView.setOnClickListener(this);
+
+        MyAdapter adapter = new MyAdapter(MainActivity.this, TestData.datas);
+        lVtestdata.setAdapter(adapter);
     }
 
     @Override
@@ -110,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //                String fl = HighLightTextUtil.getHanZiPinYinFirstLetter(hanzi);
 //                Log.i("AAAA", hanzi + "-------------->" + fl);
-                String hanzi = "abababababababababababababababababababababababababababababababababababababababab哈哈abababababababababababababababababababababababababababababababababababababababab";
+                // String hanzi = "abababababababababababababababababababababababababababababababababababababababab哈哈abababababababababababababababababababababababababababababababababababababababab";
+                String hanzi = "ab哈哈aba";
 
                 // Log.i("AAAA", "measure: " + tvtestHighLightText1.getPaint().measureText("btn_test_1ssss") + "");
                 //int maxw = tvtestHighLightText.getWidth();
@@ -131,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Log.i("AAAA", "leftpadding:" + leftpadding);
 //                Log.i("AAAA", "rightPadding:" + rightPadding);
                 break;
+
 
         }
     }

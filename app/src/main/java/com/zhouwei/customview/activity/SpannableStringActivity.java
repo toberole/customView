@@ -1,4 +1,4 @@
-package com.zhouwei.customview;
+package com.zhouwei.customview.activity;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -13,6 +13,8 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zhouwei.customview.R;
 
 public class SpannableStringActivity extends AppCompatActivity {
     private TextView tvclickablespannablestring;

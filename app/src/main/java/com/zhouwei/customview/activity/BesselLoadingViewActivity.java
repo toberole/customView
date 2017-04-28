@@ -1,7 +1,9 @@
-package com.zhouwei.customview;
+package com.zhouwei.customview.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.zhouwei.customview.R;
 
 public class BesselLoadingViewActivity extends AppCompatActivity {
 

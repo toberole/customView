@@ -1,4 +1,4 @@
-package com.zhouwei.customview;
+package com.zhouwei.customview.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.zhouwei.customview.R;
 import com.zhouwei.customview.view.DragLayout;
 import com.zhouwei.customview.view.ParallaxListview;
 

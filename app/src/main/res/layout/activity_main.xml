@@ -51,4 +51,10 @@
         android:paddingLeft="35px"
         android:paddingRight="35px"
         android:text="btn_test_1" />
+
+    <ListView
+        android:id="@+id/lV_testdata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100" />
 </LinearLayout>
