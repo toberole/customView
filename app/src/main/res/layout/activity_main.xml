@@ -37,6 +37,11 @@
         android:layout_height="wrap_content"
         android:text="btn_test_SpannableString" />
 
+    <Button
+        android:id="@+id/btn_test_Swiplayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="btn_test_Swiplayout" />
 
     <TextView
         android:id="@+id/tv_test_HighLightText"

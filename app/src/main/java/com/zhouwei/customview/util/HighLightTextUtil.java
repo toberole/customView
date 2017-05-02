@@ -1,7 +1,10 @@
 package com.zhouwei.customview.util;
 
+import android.graphics.Color;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -340,5 +343,133 @@ public class HighLightTextUtil {
 
         }
         return highLightResults;
+    }
+
+    /////////////////////////////////////////////
+    private static final String MARK = "…";
+    private static final int PREFIX_CHARACTER_LENGTH = 0;
+    private static float markWidth;
+
+    public static SpannableString highlightText(TextView textView, int maxWidth, String keyText, String content) {
+        SpannableString spannableString = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        if (markWidth == 0) {
+            markWidth = measure(textView, MARK);
+        }
+        float keyTextWidth = measure(textView, keyText);
+
+        if (content.indexOf(keyText) == 0) {
+            if (measure(textView, content) <= maxWidth) {
+                putIntoBuilder(content, "#00FF00", 0, keyText.length());
+            } else {
+                char[] chars = content.toCharArray();
+                for (char c : chars) {
+                    if (measure(textView, stringBuilder.toString() + c) <= maxWidth) {
+                        stringBuilder.append(c);
+                    } else {
+                        stringBuilder.append(MARK);
+                        break;
+                    }
+                }
+                spannableString = putIntoBuilder(stringBuilder.toString(), "#00FF00", 0, keyText.length());
+            }
+        } else if (content.lastIndexOf(keyText) == content.length() - keyText.length()) {
+            if (measure(textView, content) <= maxWidth) {
+                spannableString = putIntoBuilder(content, "#00FF00", content.length() - keyText.length(), content.length());
+            } else {
+                char[] chars = content.toCharArray();
+                for (int i = chars.length - 1; i >= 0; i--) {
+                    if (measure(textView, stringBuilder.toString() + chars[i]) <= maxWidth - markWidth) {
+                        stringBuilder.append(chars[i]);
+                    } else {
+                        stringBuilder.append(MARK);
+                        break;
+                    }
+                }
+                spannableString = putIntoBuilder(stringBuilder.reverse().toString(), "#00FF00", stringBuilder.length() - keyText.length(), stringBuilder.length());
+            }
+        } else {
+            if (measure(textView, content) <= maxWidth) {
+                spannableString = putIntoBuilder(content, "#00FF00", content.indexOf(keyText), content.indexOf(keyText) + keyText.length());
+            } else {
+                int start = content.indexOf(keyText);
+                int end = start + keyText.length();
+                if (start >= PREFIX_CHARACTER_LENGTH) {
+                    char[] chars = content.toCharArray();
+                    float prefixPlusWidth = measure(textView, content.substring(start - PREFIX_CHARACTER_LENGTH));
+                    int i;
+                    if (prefixPlusWidth < maxWidth) {
+                        for (i = start - 1 - PREFIX_CHARACTER_LENGTH; i >= 0; i--) {
+                            if (measure(textView, stringBuilder.toString() + chars[i]) <= maxWidth - prefixPlusWidth - markWidth) {
+                                stringBuilder.append(chars[i]);
+                            } else {
+                                break;
+                            }
+                        }
+
+                        if (i >= 0) {
+                            stringBuilder.append(MARK);
+                        }
+                        stringBuilder = stringBuilder.reverse().append(content.substring(start - PREFIX_CHARACTER_LENGTH));
+
+                        spannableString = putIntoBuilder(stringBuilder.toString(), "#00FF00", start - i, start - i + keyText.length());
+                    } else {
+                        float prefixWidth = measure(textView, content.substring(start - PREFIX_CHARACTER_LENGTH, start));
+                        for (i = start - 1; i >= 0; i--) {
+                            if (measure(textView, stringBuilder.toString() + chars[i]) <= maxWidth - prefixWidth - keyTextWidth - markWidth) {
+                                stringBuilder.append(chars[i]);
+                            } else {
+                                stringBuilder.append(MARK);
+                                break;
+                            }
+                        }
+
+                        stringBuilder = new StringBuilder(stringBuilder.reverse());
+                        stringBuilder.append(keyText);
+                        for (int j = end; j < chars.length; j++) {
+                            if (measure(textView, stringBuilder.toString() + chars[j]) <= maxWidth) {
+                                stringBuilder.append(chars[j]);
+                            } else {
+                                stringBuilder.append(MARK);
+                                break;
+                            }
+                        }
+
+                        if (start > PREFIX_CHARACTER_LENGTH) {
+                            spannableString = putIntoBuilder(MARK + stringBuilder, "#00FF00", PREFIX_CHARACTER_LENGTH + 1, PREFIX_CHARACTER_LENGTH + 1 + keyText.length());
+                        } else {
+                            spannableString = putIntoBuilder(stringBuilder.toString(), "#00FF00", start, end);
+                        }
+                    }
+                } else {
+                    char[] chars = content.toCharArray();
+                    int i;
+                    stringBuilder.append(content.substring(0, start));
+                    for (i = start; i < content.length(); i++) {
+                        if (measure(textView, stringBuilder.toString() + chars[i]) < maxWidth - markWidth) {
+                            stringBuilder.append(chars[i]);
+                        } else {
+                            break;
+                        }
+                    }
+
+                    if (i < content.length()) {
+                        stringBuilder.append(MARK);
+                    }
+                    spannableString = putIntoBuilder(stringBuilder.toString(), "#00FF00", start, end);
+                }
+            }
+        }
+        return spannableString;
+    }
+
+    private static SpannableString putIntoBuilder(String text, String color, int start, int end) {
+        SpannableString builder = new SpannableString(text);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor(color)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return builder;
+    }
+
+    private static float measure(TextView textView, String text) {
+        return textView.getPaint().measureText(text);
     }
 }

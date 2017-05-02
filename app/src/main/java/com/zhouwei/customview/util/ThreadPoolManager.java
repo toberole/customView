@@ -10,29 +10,29 @@ import java.util.concurrent.TimeUnit;
  * @author itcast
  * 
  */
-public class ThreadManager {
-	private ThreadManager() {
+public class ThreadPoolManager {
+	private ThreadPoolManager() {
 
 	}
 
-	private static ThreadManager instance = new ThreadManager();
+	private static ThreadPoolManager instance = new ThreadPoolManager();
 	private ThreadPoolProxy longPool;
 	private ThreadPoolProxy shortPool;
 
-	public static ThreadManager getInstance() {
+	public static ThreadPoolManager getInstance() {
 		return instance;
 	}
 
-	// 联网比较耗时
 	// cpu的核数*2+1
-	public synchronized ThreadPoolProxy createLongPool() {
+	public synchronized ThreadPoolProxy getLongPool() {
 		if (longPool == null) {
 			longPool = new ThreadPoolProxy(5, 5, 5000L);
 		}
 		return longPool;
 	}
+
 	// 非耗时操作
-	public synchronized ThreadPoolProxy createShortPool() {
+	public synchronized ThreadPoolProxy getShortPool() {
 		if(shortPool==null){
 			shortPool = new ThreadPoolProxy(3, 3, 5000L);
 		}

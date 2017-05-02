@@ -21,6 +21,7 @@ import static com.zhouwei.customview.util.AESCipher.aesDecryptString;
 /**
  * hehe
  */
+
 /**
  * wawa
  */
@@ -34,11 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private android.widget.TextView tvtestHighLightText;
     private TextView tvtestHighLightText1;
     private android.widget.ListView lVtestdata;
+    private Button btntestSwiplayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.btntestSwiplayout = (Button) findViewById(R.id.btn_test_Swiplayout);
         this.lVtestdata = (ListView) findViewById(R.id.lV_testdata);
         this.tvtestHighLightText1 = (TextView) findViewById(R.id.tv_test_HighLightText1);
         this.tvtestHighLightText = (TextView) findViewById(R.id.tv_test_HighLightText);
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btntestaes.setOnClickListener(this);
         btntestSpannableString.setOnClickListener(this);
         btntestBesselLoadingView.setOnClickListener(this);
+        btntestSwiplayout.setOnClickListener(this);
 
         MyAdapter adapter = new MyAdapter(MainActivity.this, TestData.datas);
         lVtestdata.setAdapter(adapter);
@@ -63,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = null;
         switch (v.getId()) {
+            case R.id.btn_test_Swiplayout:
+                intent = new Intent(MainActivity.this, SwipeLayoutActivity.class);
+                startActivity(intent);
+                break;
             case R.id.btn_test_ParallaxListview:
                 intent = new Intent(MainActivity.this, ParallaxListviewActivity.class);
                 startActivity(intent);
@@ -138,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.i("AAAA", "maxw:" + maxw);
                 tvtestHighLightText.setTextColor(Color.BLACK);
                 tvtestHighLightText.setTextSize(40);
-                HighLightTextUtil.highLightText(hanzi, "哈哈", Color.RED, maxw,tvtestHighLightText);
+                HighLightTextUtil.highLightText(hanzi, "哈哈", Color.RED, maxw, tvtestHighLightText);
 
 //                int w = tvtestHighLightText1.getWidth();
 //                int leftpadding = tvtestHighLightText1.getPaddingLeft();
