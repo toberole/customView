@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,11 +40,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvtestHighLightText1;
     private android.widget.ListView lVtestdata;
     private Button btntestSwiplayout;
+    private android.widget.EditText ettesttextchange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Log.i("AAAA", "width: " + getResources().getDimension(R.dimen.width));
+        // MediaStore.Images.Media.DATA
+        View v = new View(this);
+        // FloatEvaluator
+        this.ettesttextchange = (EditText) findViewById(R.id.et_test_textchange);
         this.btntestSwiplayout = (Button) findViewById(R.id.btn_test_Swiplayout);
         this.lVtestdata = (ListView) findViewById(R.id.lV_testdata);
         this.tvtestHighLightText1 = (TextView) findViewById(R.id.tv_test_HighLightText1);
@@ -59,6 +70,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btntestBesselLoadingView.setOnClickListener(this);
         btntestSwiplayout.setOnClickListener(this);
 
+       // tvtestHighLightText.animate().translationX(200).translationY(500).start();
+
+        ettesttextchange.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.i("AAAA", "===beforeTextChanged===");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i("AAAA", "===onTextChanged===");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.i("AAAA", "===afterTextChanged===");
+            }
+        });
+
         MyAdapter adapter = new MyAdapter(MainActivity.this, TestData.datas);
         lVtestdata.setAdapter(adapter);
     }
@@ -68,8 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = null;
         switch (v.getId()) {
             case R.id.btn_test_Swiplayout:
-                intent = new Intent(MainActivity.this, SwipeLayoutActivity.class);
-                startActivity(intent);
+//                intent = new Intent(MainActivity.this, SwipeLayoutActivity.class);
+//                startActivity(intent);
+                Log.i("AAAA","**************");
+                tvtestHighLightText.animate().translationY(500).translationX(300).setDuration(3000).start();
+                AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f,0.5f);
+                alphaAnimation.setFillAfter(true);
                 break;
             case R.id.btn_test_ParallaxListview:
                 intent = new Intent(MainActivity.this, ParallaxListviewActivity.class);
