@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import com.zhouwei.customview.adapter.MyAdapter;
 import com.zhouwei.customview.test.TestData;
 import com.zhouwei.customview.util.AESCipher;
 import com.zhouwei.customview.util.HighLightTextUtil;
+import com.zhouwei.customview.util.HookViewClickUtil;
 
 import static com.zhouwei.customview.util.AESCipher.aesDecryptString;
 
@@ -63,14 +65,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btntestaes = (Button) findViewById(R.id.btn_test_aes);
         this.btntestParallaxListview = (Button) findViewById(R.id.btn_test_ParallaxListview);
 
-        btntestHighLightText.setOnClickListener(this);
+        btntestHighLightText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("AAAA", "####################");
+            }
+        });
         btntestParallaxListview.setOnClickListener(this);
         btntestaes.setOnClickListener(this);
         btntestSpannableString.setOnClickListener(this);
         btntestBesselLoadingView.setOnClickListener(this);
         btntestSwiplayout.setOnClickListener(this);
 
-       // tvtestHighLightText.animate().translationX(200).translationY(500).start();
+        getWindow().getDecorView().post(new Runnable() {
+            @Override
+            public void run() {
+                HookViewClickUtil.hookView(btntestHighLightText);
+            }
+        });
+
+        getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+            }
+        });
+
+        // tvtestHighLightText.animate().translationX(200).translationY(500).start();
 
         ettesttextchange.addTextChangedListener(new TextWatcher() {
             @Override
@@ -100,9 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_test_Swiplayout:
 //                intent = new Intent(MainActivity.this, SwipeLayoutActivity.class);
 //                startActivity(intent);
-                Log.i("AAAA","**************");
+                Log.i("AAAA", "**************");
                 tvtestHighLightText.animate().translationY(500).translationX(300).setDuration(3000).start();
-                AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f,0.5f);
+                AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.5f);
                 alphaAnimation.setFillAfter(true);
                 break;
             case R.id.btn_test_ParallaxListview:
