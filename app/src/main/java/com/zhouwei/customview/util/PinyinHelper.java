@@ -562,7 +562,8 @@ public class PinyinHelper {
     }
 
     /**
-     * 汉字返回拼音，字母原样返回，都转换为小写
+     * 返回汉字对应的拼音
+     * 字母原样返回，都转换为小写
      *
      * @param input 需要转换的字符串
      * @return

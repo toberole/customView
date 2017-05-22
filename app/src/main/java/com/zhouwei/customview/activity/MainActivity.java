@@ -3,6 +3,7 @@ package com.zhouwei.customview.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import com.zhouwei.customview.test.TestData;
 import com.zhouwei.customview.util.AESCipher;
 import com.zhouwei.customview.util.HighLightTextUtil;
 import com.zhouwei.customview.util.HookViewClickUtil;
+import com.zhouwei.customview.util.TimeUtil;
 
 import static com.zhouwei.customview.util.AESCipher.aesDecryptString;
 
@@ -48,10 +50,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Button btn_test_pop = (Button) findViewById(R.id.btn_test_pop);
+        btn_test_pop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PopActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+        Log.i("AAAA", TimeUtil.secondsToChatTime((int) (SystemClock.currentThreadTimeMillis()/1000/1000)));
         // Log.i("AAAA", "width: " + getResources().getDimension(R.dimen.width));
         // MediaStore.Images.Media.DATA
         View v = new View(this);
+
+        // throws new android.os.DeadObjectException("");
         // FloatEvaluator
         this.ettesttextchange = (EditText) findViewById(R.id.et_test_textchange);
         this.btntestSwiplayout = (Button) findViewById(R.id.btn_test_Swiplayout);
@@ -110,8 +122,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+//        Dialog dialog = new Dialog(MainActivity.this);
+//        TextView tgv = new TextView(MainActivity.this);
+//        tgv.setText("huhuhuhu");
+//        dialog.setContentView(tgv);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.show();
+
         MyAdapter adapter = new MyAdapter(MainActivity.this, TestData.datas);
         lVtestdata.setAdapter(adapter);
+
+
     }
 
     @Override
