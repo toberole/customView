@@ -9,53 +9,72 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:orientation="vertical">
+
+        <com.zhouwei.customview.view.MentionEditText
+            android:id="@+id/me_test_et"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:hint="et_test_MentionEditText" />
+
         <EditText
             android:id="@+id/et_test_textchange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="et_test_textchange" />
+            android:hint="et_test_textchange"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btn_test_ParallaxListview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="btn_test_ParallaxListview" />
+            android:text="btn_test_ParallaxListview"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_test_BesselLoadingView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="btn_test_BesselLoadingView" />
+            android:text="btn_test_BesselLoadingView"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_test_HighLightText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="btn_test_HighLightText" />
+            android:text="btn_test_HighLightText"
+            android:visibility="gone" />
 
 
         <Button
             android:id="@+id/btn_test_aes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="btn_test_AES" />
+            android:text="btn_test_AES"
+            android:visibility="gone" />
 
 
         <Button
             android:id="@+id/btn_test_SpannableString"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="btn_test_SpannableString" />
+            android:text="btn_test_SpannableString"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_test_Swiplayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="btn_test_Swiplayout" />
+            android:text="btn_test_Swiplayout"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btn_test_pop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="btn_test_pop" />
+            android:text="btn_test_pop"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_test_HighLightText"
             android:layout_width="wrap_content"
@@ -69,7 +88,6 @@
             android:paddingLeft="35px"
             android:paddingRight="35px"
             android:text="btn_test_1" />
-
 
 
         <ListView

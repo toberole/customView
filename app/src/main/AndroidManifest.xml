@@ -21,7 +21,8 @@
         <activity android:name=".activity.SpannableStrActivity" />
         <activity android:name=".activity.BesselLoadingViewActivity" />
         <activity android:name=".activity.SwipeLayoutActivity" />
-        <activity android:name=".activity.PopActivity"/>
+        <activity android:name=".activity.PopActivity" />
+        <activity android:name=".activity.AtActivity"></activity>
     </application>
 
 </manifest>
