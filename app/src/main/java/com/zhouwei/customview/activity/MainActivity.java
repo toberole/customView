@@ -7,9 +7,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zhouwei.customview.R;
-import com.zhouwei.customview.util.StringUtil;
 import com.zhouwei.customview.view.MentionEditText;
 
 import java.util.regex.Pattern;
@@ -104,31 +101,68 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_emoji);
-        EditText et_test_emoji = (EditText) findViewById(R.id.et_test_emoji);
 
-        et_test_emoji.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(!TextUtils.isEmpty(s)){
-                    if(StringUtil.isEmojiCharacter(s.charAt(0))){
-                        Log.i("AAAA","是Emoji字符");
-                    }else {
-                        Log.i("AAAA","不是Emoji字符");
-                    }
-                }
 
-            }
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        EditText et_test_emoji = (EditText) findViewById(R.id.et_test_emoji);
+//
+//        et_test_emoji.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if(!TextUtils.isEmpty(s)){
+//                    if(StringUtil.isEmojiCharacter(s.charAt(0))){
+//                        Log.i("AAAA","是Emoji字符");
+//                    }else {
+//                        Log.i("AAAA","不是Emoji字符");
+//                    }
+//                }
+//
+//            }
+//        });
 
 
 //        et_emoji = (EditText) findViewById(R.id.et_emoji);
