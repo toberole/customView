@@ -10,11 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zhouwei.customview.R;
+import com.zhouwei.customview.adapter.SwipeLayoutTestAdapter;
+import com.zhouwei.customview.test.DataEngine;
 import com.zhouwei.customview.view.MentionEditText;
 
 import java.util.regex.Pattern;
@@ -102,40 +107,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_emoji);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        LinearLayout ll_container = (LinearLayout) findViewById(R.id.ll_container);
+        ListView listView = new ListView(MainActivity.this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        listView.setLayoutParams(params);
+        listView.setAdapter(new SwipeLayoutTestAdapter(DataEngine.getInstance().getDatas()));
 
 
 //        EditText et_test_emoji = (EditText) findViewById(R.id.et_test_emoji);
