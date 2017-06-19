@@ -31,6 +31,8 @@ public class TestUseFul extends AppCompatActivity {
                 }
             }
         });
+
+//        ActivityManager.getMyMemoryState();
     }
 
     private boolean flag = false;

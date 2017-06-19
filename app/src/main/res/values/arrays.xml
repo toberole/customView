@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="texts">
+        <item>Do</item>
+        <item>One Thing</item>
+        <item>At same time</item>
+        <item>How are you</item>
+        <item>To say</item>
+        <item>For working</item>
+        <item>How old are you</item>
+        <item>Name is FD</item>
+        <item>China is so grate</item>
+        <item>News</item>
+        <item>Hello World</item>
+    </string-array>
+</resources>
